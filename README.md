@@ -43,6 +43,7 @@ The Docker image accepts the following parameters:
 * One of `MYSQL_ROOT_PASSWORD` must be defined.
 * The image will create the user `xtrabackup@localhost` for the XtraBackup SST method. If you want to use a password for the `xtrabackup` user, set `XTRABACKUP_PASSWORD`. 
 * If you want to use the discovery service (right now only `etcd` is supported), set the address (ip:port format) to `DISCOVERY_SERVICE`. It can accept multiple addresses separated by a comma. The image will automatically find a running cluser by `CLUSTER_NAME` and join to the existing cluster (or start a new one).
+* If you are using Rancher (https://rancher.com), you must use `ETCD_SERVICE` and `ETCD_PORT` instead of `DISCOVERY_SERVICE`.
 * If you want to start without the discovery service, use the `CLUSTER_JOIN` variable. Empty variables will start a new cluster. To join an existing cluster, set `CLUSTER_JOIN` to the list of IP addresses running cluster nodes.
 * `TTL` by default is 30 seconds. Container will report every `TTL - 2` seconds when it's alive (wsrep_cluster_state\_comment=Synced) via `report_status.sh`. If a container is down, it will no longer send an update to etcd thus the key (wsrep_cluster_state_comment) is removed after expiration. This simply indicates that the registered node is no longer synced with the cluster and it will be skipped when constructing the Galera communication address.
 
