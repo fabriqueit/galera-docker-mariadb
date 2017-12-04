@@ -106,7 +106,7 @@ function join { local IFS="$1"; shift; echo "$*"; }
 
 if [ -z "$ETCD_SERVICE" ] && [ -z "$ETCD_PORT" ]; then
 	DISCOVERY_SERVICE=$(getent hosts $ETCD_SERVICE | awk '{ print $1 }' | sed "s/$/:$ETCD_PORT/" | paste -sd ",")
-if
+fi
 
 if [ -z "$DISCOVERY_SERVICE" ]; then
 	cluster_join=$CLUSTER_JOIN
