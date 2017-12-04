@@ -104,7 +104,7 @@ fi
 
 function join { local IFS="$1"; shift; echo "$*"; }
 
-if [ -z "$ETCD_SERVICE" ] && [ -z "$ETCD_PORT" ]; then
+if [ -n "$ETCD_SERVICE" ] && [ -n "$ETCD_PORT" ]; then
 	DISCOVERY_SERVICE=$(getent hosts $ETCD_SERVICE | awk '{ print $1 }' | sed "s/$/:$ETCD_PORT/" | paste -sd ",")
 fi
 
